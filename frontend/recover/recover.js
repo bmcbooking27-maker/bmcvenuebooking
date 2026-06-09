@@ -26,6 +26,20 @@ document.addEventListener("DOMContentLoaded", () => {
         errorMsg.style.display = 'none';
     }
 
+    // Check if the URL contains an error from an expired or invalid link
+    const hashParams = new URLSearchParams(window.location.hash.substring(1));
+    const queryParams = new URLSearchParams(window.location.search);
+    const errorDesc = hashParams.get('error_description') || queryParams.get('error_description');
+    
+    if (errorDesc && (errorDesc.toLowerCase().includes('expired') || errorDesc.toLowerCase().includes('invalid'))) {
+        showError("Your password reset link has expired or is invalid. Please go to the login page and request a new one.");
+        resetBtn.disabled = true;
+        resetBtn.style.opacity = "0.7";
+        resetBtn.style.cursor = "not-allowed";
+        newPasswordInput.disabled = true;
+        confirmPasswordInput.disabled = true;
+    }
+
     resetForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         hideError();
