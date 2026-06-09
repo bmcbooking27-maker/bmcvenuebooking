@@ -1,45 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
-    initMobileNav();
     initVenuesPage();
     initHomeImageAnimations();
+    checkAuthErrors();
 });
-
-function initMobileNav() {
-    const navbar = document.querySelector(".navbar");
-    const toggle = document.querySelector(".nav-toggle");
-    if (!navbar || !toggle) return;
-
-    toggle.addEventListener("click", (e) => {
-        e.stopPropagation();
-        const isOpen = navbar.classList.toggle("is-open");
-        toggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
-        document.body.style.overflow = isOpen ? "hidden" : "";
-    });
-
-    document.addEventListener("click", (e) => {
-        if (!navbar.contains(e.target)) {
-            navbar.classList.remove("is-open");
-            toggle.setAttribute("aria-expanded", "false");
-            document.body.style.overflow = "";
-        }
-    });
-
-    navbar.querySelectorAll(".nav-item:not(#contact-btn), .nav-actions a, .nav-actions button").forEach((el) => {
-        el.addEventListener("click", () => {
-            navbar.classList.remove("is-open");
-            toggle.setAttribute("aria-expanded", "false");
-            document.body.style.overflow = "";
-        });
-    });
-
-    window.addEventListener("resize", () => {
-        if (window.innerWidth > 768) {
-            navbar.classList.remove("is-open");
-            toggle.setAttribute("aria-expanded", "false");
-            document.body.style.overflow = "";
-        }
-    });
-}
 
 function initVenuesPage() {
     const dateInput = document.getElementById("venue-date-filter");
@@ -181,13 +144,13 @@ async function loadVenuesTable() {
         const tr = document.createElement("tr");
         tr.className = "row-booked";
         tr.innerHTML = `
-            <td class="row-index" data-label="No.">${String(index + 1).padStart(2, "0")}</td>
-            <td class="venue-name-cell" data-label="Venue">${b.Venue || "—"}</td>
-            <td data-label="Department">${b.Department_Name || "—"}</td>
-            <td data-label="Function">${b.Function_Name || "—"}</td>
-            <td data-label="Date">${b.Date ? b.Date.split('-').reverse().join('-') : "—"}</td>
-            <td data-label="Start Time">${b['Time(from)'] || "—"}</td>
-            <td data-label="End Time">${b['Time(to)'] || "—"}</td>
+            <td class="row-index">${String(index + 1).padStart(2, "0")}</td>
+            <td class="venue-name-cell">${b.Venue || "—"}</td>
+            <td>${b.Department_Name || "—"}</td>
+            <td>${b.Function_Name || "—"}</td>
+            <td>${b.Date ? b.Date.split('-').reverse().join('-') : "—"}</td>
+            <td>${b['Time(from)'] || "—"}</td>
+            <td>${b['Time(to)'] || "—"}</td>
         `;
         tbody.appendChild(tr);
     });
@@ -338,4 +301,115 @@ function getBackgroundUrl(el) {
     }
 
     return null;
+}
+
+function checkAuthErrors() {
+    const hashParams = new URLSearchParams(window.location.hash.substring(1));
+    const queryParams = new URLSearchParams(window.location.search);
+    const errorDesc = hashParams.get('error_description') || queryParams.get('error_description');
+    
+    if (errorDesc && (errorDesc.toLowerCase().includes('expired') || errorDesc.toLowerCase().includes('invalid'))) {
+        showAuthErrorModal();
+        // Clean up the URL so it doesn't show again on refresh
+        window.history.replaceState(null, null, window.location.pathname);
+    }
+}
+
+function showAuthErrorModal() {
+    const modal = document.createElement('div');
+    modal.style.position = 'fixed';
+    modal.style.top = '0';
+    modal.style.left = '0';
+    modal.style.width = '100%';
+    modal.style.height = '100%';
+    modal.style.backgroundColor = 'rgba(0,0,0,0.6)';
+    modal.style.display = 'flex';
+    modal.style.alignItems = 'center';
+    modal.style.justifyContent = 'center';
+    modal.style.zIndex = '9999';
+    modal.style.opacity = '0';
+    modal.style.transition = 'opacity 0.3s ease';
+    
+    const modalContent = document.createElement('div');
+    modalContent.style.backgroundColor = '#ffffff';
+    modalContent.style.padding = '40px';
+    modalContent.style.borderRadius = '12px';
+    modalContent.style.maxWidth = '400px';
+    modalContent.style.textAlign = 'center';
+    modalContent.style.boxShadow = '0 10px 25px rgba(0,0,0,0.15)';
+    modalContent.style.fontFamily = 'system-ui, -apple-system, sans-serif';
+    modalContent.style.transform = 'translateY(20px)';
+    modalContent.style.transition = 'transform 0.3s ease';
+    
+    const icon = document.createElement('div');
+    icon.innerHTML = '<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#e53e3e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>';
+    icon.style.marginBottom = '20px';
+    
+    const title = document.createElement('h3');
+    title.textContent = 'Link Expired';
+    title.style.marginTop = '0';
+    title.style.marginBottom = '15px';
+    title.style.color = '#2d3748';
+    title.style.fontSize = '24px';
+    
+    const message = document.createElement('p');
+    message.textContent = 'Your password reset link has expired or is invalid. Please request a new one from the login page.';
+    message.style.color = '#718096';
+    message.style.lineHeight = '1.5';
+    message.style.marginBottom = '30px';
+    
+    const buttonContainer = document.createElement('div');
+    buttonContainer.style.display = 'flex';
+    buttonContainer.style.gap = '15px';
+    buttonContainer.style.justifyContent = 'center';
+    
+    const loginBtn = document.createElement('button');
+    loginBtn.textContent = 'Go to Login';
+    loginBtn.className = 'btn-primary-blue';
+    loginBtn.style.padding = '10px 20px';
+    loginBtn.style.border = 'none';
+    loginBtn.style.borderRadius = '6px';
+    loginBtn.style.cursor = 'pointer';
+    loginBtn.style.fontWeight = '600';
+    loginBtn.style.backgroundColor = '#1d4ed8'; // standard primary blue
+    loginBtn.style.color = 'white';
+    loginBtn.onclick = () => {
+        const inSubfolder = window.location.pathname.includes('/venues/');
+        window.location.href = inSubfolder ? '../login/login.html' : 'login/login.html';
+    };
+    
+    const closeBtn = document.createElement('button');
+    closeBtn.textContent = 'Close';
+    closeBtn.style.padding = '10px 20px';
+    closeBtn.style.backgroundColor = '#e2e8f0';
+    closeBtn.style.color = '#4a5568';
+    closeBtn.style.border = 'none';
+    closeBtn.style.borderRadius = '6px';
+    closeBtn.style.cursor = 'pointer';
+    closeBtn.style.fontWeight = '600';
+    closeBtn.onclick = () => {
+        modal.style.opacity = '0';
+        modalContent.style.transform = 'translateY(20px)';
+        setTimeout(() => {
+            if (document.body.contains(modal)) {
+                document.body.removeChild(modal);
+            }
+        }, 300);
+    };
+    
+    buttonContainer.appendChild(closeBtn);
+    buttonContainer.appendChild(loginBtn);
+    
+    modalContent.appendChild(icon);
+    modalContent.appendChild(title);
+    modalContent.appendChild(message);
+    modalContent.appendChild(buttonContainer);
+    modal.appendChild(modalContent);
+    document.body.appendChild(modal);
+    
+    // Trigger animation
+    requestAnimationFrame(() => {
+        modal.style.opacity = '1';
+        modalContent.style.transform = 'translateY(0)';
+    });
 }
