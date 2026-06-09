@@ -14,39 +14,31 @@
         <div class="nav-brand">
             <span class="brand-text">BHARATA MATA COLLEGE</span>
         </div>
-
-        <button class="nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
-            <span class="nav-toggle-bar"></span>
-            <span class="nav-toggle-bar"></span>
-            <span class="nav-toggle-bar"></span>
-        </button>
-
-        <div class="nav-panel">
-            <nav class="nav-menu">
-                <a href="index.html" class="nav-item active">Home</a>
-                <a href="venues/venues.html" class="nav-item">Venues</a>
-                <a href="#booking" class="nav-item" id="booking-log-link">Booking Log</a>
-                <div class="nav-contact-wrapper">
-                    <button id="contact-btn" class="nav-item" onclick="toggleContactDropdown(event)">Contact</button>
-                    <div id="contact-dropdown">
-                        <p class="contact-dropdown-label">Contact No:</p>
-                        <hr class="contact-dropdown-divider">
-                        <div class="contact-dropdown-item">
-                            <span class="material-symbols-outlined contact-dropdown-icon">call</span>
-                            <a href="tel:+9112345678" class="contact-dropdown-number">+91 12345678</a>
-                        </div>
-                        <hr class="contact-number-divider">
-                        <div class="contact-dropdown-item">
-                            <span class="material-symbols-outlined contact-dropdown-icon">call</span>
-                            <a href="tel:+9187654321" class="contact-dropdown-number">+91 87654321</a>
-                        </div>
+        
+        <nav class="nav-menu">
+            <a href="index.html" class="nav-item active">Home</a>
+            <a href="venues/venues.html" class="nav-item">Venues</a>
+            <a href="#booking" class="nav-item" id="booking-log-link">Booking Log</a>
+            <div class="nav-contact-wrapper">
+                <button id="contact-btn" class="nav-item" onclick="toggleContactDropdown(event)">Contact</button>
+                <div id="contact-dropdown">
+                    <p class="contact-dropdown-label">Contact No:</p>
+                    <hr class="contact-dropdown-divider">
+                    <div class="contact-dropdown-item">
+                        <span class="material-symbols-outlined contact-dropdown-icon">call</span>
+                        <a href="tel:+9112345678" class="contact-dropdown-number">+91 12345678</a>
+                    </div>
+                    <hr class="contact-number-divider">
+                    <div class="contact-dropdown-item">
+                        <span class="material-symbols-outlined contact-dropdown-icon">call</span>
+                        <a href="tel:+9187654321" class="contact-dropdown-number">+91 87654321</a>
                     </div>
                 </div>
-            </nav>
-
-            <div class="nav-actions">
-                <a href="login/login.html"><button class="btn-admin" id="admin-portal-btn">Admin Login</button></a>
             </div>
+        </nav>
+
+        <div class="nav-actions">
+            <a href="login/login.html"><button class="btn-admin" id="admin-portal-btn">Admin Login</button></a>
         </div>
     </header>
 
@@ -216,7 +208,7 @@
     </script>
     
     <!-- Floating Contact Ball -->
-    <a href="tel:+9112345678" class="floating-contact-ball" title="Contact Us Directly">
+    <a href="tel:+9112345678" class="floating-contact-ball" title="Contact Us Directly" style="bottom: 18px;">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
             <path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.11-.27c1.12.45 2.33.69 3.58.69a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.24 2.46.69 3.58a1 1 0 0 1-.27 1.11z"/>
         </svg>
