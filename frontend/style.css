@@ -10,7 +10,7 @@
     --text-secondary: #333F38;
     --white: #FFFFFF;
 
-    --navbar-height: 72px;          /* Fixed navbar height offset */
+    --navbar-height: 88px;          /* Fixed navbar height offset */
 }
 
 /* --- DOCUMENT DEFAULTS --- */
@@ -60,7 +60,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 16px 40px;
+    padding: 24px 40px;
     background-color: var(--primary-blue);
     border-bottom: 4px solid var(--dark-yellow-gold);
     position: fixed;
@@ -72,8 +72,8 @@ body {
 }
 
 .brand-text {
-    font-size: 15px;
-    font-weight: 700;
+    font-size: 18px;
+    font-weight: 800;
     letter-spacing: 0.5px;
     color: var(--white);
     text-decoration: none;
@@ -88,8 +88,8 @@ body {
 .nav-item {
     text-decoration: none;
     color: rgba(255, 255, 255, 0.7);
-    font-size: 14px;
-    font-weight: 500;
+    font-size: 16px;
+    font-weight: 600;
     position: relative;
     transition: color 0.2s;
 }
