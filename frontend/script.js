@@ -157,15 +157,24 @@ async function loadVenuesTable() {
     filtered.forEach((b, index) => {
         const tr = document.createElement("tr");
         tr.className = "row-booked";
-        tr.innerHTML = `
-            <td class="row-index">${String(index + 1).padStart(2, "0")}</td>
-            <td class="venue-name-cell">${b.Venue || "—"}</td>
-            <td>${b.Department_Name || "—"}</td>
-            <td>${b.Function_Name || "—"}</td>
-            <td>${b.Date ? b.Date.split('-').reverse().join('-') : "—"}</td>
-            <td>${formatTimeToAMPM(b['Time(from)'])}</td>
-            <td>${formatTimeToAMPM(b['Time(to)'])}</td>
-        `;
+
+        const cells = [
+            { text: String(index + 1).padStart(2, "0"), className: "row-index" },
+            { text: b.Venue || "—", className: "venue-name-cell" },
+            { text: b.Department_Name || "—" },
+            { text: b.Function_Name || "—" },
+            { text: b.Date ? b.Date.split('-').reverse().join('-') : "—" },
+            { text: formatTimeToAMPM(b['Time(from)']) },
+            { text: formatTimeToAMPM(b['Time(to)']) },
+        ];
+
+        cells.forEach((cell) => {
+            const td = document.createElement("td");
+            td.textContent = cell.text;
+            if (cell.className) td.className = cell.className;
+            tr.appendChild(td);
+        });
+
         tbody.appendChild(tr);
     });
 }

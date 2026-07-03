@@ -1,11 +1,11 @@
 {
   "name": "bmcbooking",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "BMC Venue Booking - venue availability portal for Bharata Mata College",
+  "main": "backend/server.js",
   "scripts": {
     "start": "node backend/server.js",
-    "dev": "node backend/server.js",
+    "dev": "node --watch backend/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -14,7 +14,9 @@
   "type": "commonjs",
   "dependencies": {
     "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
     "express": "^5.2.1",
-    "pg": "^8.21.0"
+    "express-rate-limit": "^8.5.2",
+    "helmet": "^8.2.0"
   }
 }

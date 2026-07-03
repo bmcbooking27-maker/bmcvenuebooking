@@ -1,11 +1,3 @@
-function toggleContactDropdown(e) {
-    e.stopPropagation();
-    var dd = document.getElementById('contact-dropdown');
-    var btn = document.getElementById('contact-btn');
-    var isOpen = dd.style.display === 'block';
-    dd.style.display = isOpen ? 'none' : 'block';
-    btn.classList.toggle('active', !isOpen);
-}
 document.addEventListener('click', function() {
     var dd = document.getElementById('contact-dropdown');
     var btn = document.getElementById('contact-btn');
