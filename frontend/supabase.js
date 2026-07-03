@@ -1,5 +1,5 @@
 const SUPABASE_URL = 'https://uhulzdjzdkchiywjiayj.supabase.co';
-const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVodWx6ZGp6ZGtjaGl5d2ppYXlqIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc4MDc0NDMyNiwiZXhwIjoyMDk2MzIwMzI2fQ.h7oU8wpPIDPofzy7B_1c4jgNVWiR80n5JHrF_T4muMw';
+const SUPABASE_KEY = 'sb_publishable_4WKtinY-9NmBJoy8GT2O1w_kWYE3gJJ';
 
 async function fetchBookings() {
     try {
