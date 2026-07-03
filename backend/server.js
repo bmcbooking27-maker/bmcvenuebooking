@@ -104,9 +104,13 @@ app.use((err, _req, res, _next) => {
     res.status(500).json({ error: 'Internal server error.' });
 });
 
-app.listen(PORT, () => {
-    console.log(`==================================================`);
-    console.log(` BMC Venue Booking Server running on port ${PORT}`);
-    console.log(` App is live at: http://localhost:${PORT}`);
-    console.log(`==================================================`);
-});
+if (require.main === module) {
+    app.listen(PORT, () => {
+        console.log(`==================================================`);
+        console.log(` BMC Venue Booking Server running on port ${PORT}`);
+        console.log(` App is live at: http://localhost:${PORT}`);
+        console.log(`==================================================`);
+    });
+}
+
+module.exports = app;
